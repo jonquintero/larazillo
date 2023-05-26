@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('listings', function (Blueprint $table) {
-            $table->timestamp('sold_at')->nullable()->after('price');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->uuid('notifiable_id')->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('listings', function (Blueprint $table) {
-           $table->dropColumn('sold_at');
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->unsignedBigInteger('notifiable_id')->change();
         });
     }
 };

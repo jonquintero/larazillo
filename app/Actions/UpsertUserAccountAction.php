@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\DataTransferObjects\UserAccountData;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,5 +17,6 @@ class UpsertUserAccountAction
         $user->password = Hash::make($userAccountData->password);
         $user->save();
         Auth::login($user);
+        event(new Registered($user));
     }
 }
